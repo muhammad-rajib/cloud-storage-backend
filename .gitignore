@@ -1,0 +1,23 @@
+.vscode
+__pycache__
+.pytest_cache
+test.db
+log.txt
+
+# ENV files
+.env
+.env.*
+env3.*
+env
+venv
+
+# vim temporary files
+*~
+.*.sw?
+.cache
+
+# macOS
+.DS_Store
+
+# alembic migrations files
+alembic/versions/

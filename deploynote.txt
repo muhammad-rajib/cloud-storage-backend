@@ -1,0 +1,63 @@
+Operating System:
+=======================================
+1. Upgrade OS
+2. Install Python 3.10.10
+3. Install and update pip
+4. Install pipenv via latest pip
+5. Install postgresql:15 or later version
+
+
+RUN YOUR APP
+========================================
+# Clone your git project
+cmd: git clone project.git
+
+# Move your project dir
+cmd: cd project-dir
+
+# Create virtualenv using pipenv
+cmd: pipenv install
+
+# Activate venv
+cmd: pipenv shell OR source $(pipenv --venv)/bin/activate
+
+# Install Dependencies
+cmd: pipenv install -r requirements.txt
+
+
+Load .env in OS
+============================================
+# Add this below command in .bashrc .bash_profile
+set -o allexport; source .env; set +o allexport
+
+
+RUN APP:
+=============================================
+cmd: uvicorn app.main:app --host 0.0.0.0 --port 8000
+note:
+- access via ip:port 
+- if failed to access: check your firewall settings
+
+# Run app using gunicorn
+cmd: gunicorn -w 4 -k uvicorn.workers.UvicornWorker app.main:app --bind 0.0.0.0:8000
+
+
+# Setup other services
+=============================================
+# Setup gunicorn.service
+# Setup nginx configuration
+# Setup Domain
+# Setup SSL to handle HTTPS requests (certbot for ssl)
+
+
+# Setup FIREWALL (ufd --> default firewall)
+=============================================
+- sudo ufw status
+- sudo allow http 
+- sudo allow https 
+- sudo allow ssh
+- sudo allow port(if any)
+- sudo ufw enable 
+
+# delete firewall rule 
+- sudo ufw delete allow rule-name (like: http, https, etc)

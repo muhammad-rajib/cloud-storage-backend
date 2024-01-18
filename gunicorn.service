@@ -1,0 +1,15 @@
+[Unit]
+Description=CloudStorage Gunicorn Service to server cloud-storage APIs
+After=network.target
+
+[Service]
+User=add_user
+Group=add_group
+
+WorkingDirectory=add_working_directory(get venv by cmnd: pipenv --venv)
+Environment="PATH=add_venv_path
+EnvironmentFile=add_dotenv_file_path
+ExecStart=add_venv_path/bin/gunicorn -w 6 -k uvicorn.workers.UvicornWorker app.main:app --bind 0.0.0.0:8000
+
+[Install]
+WantedBy=multi-user.target
