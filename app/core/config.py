@@ -9,7 +9,7 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 class Settings(BaseSettings):
     # load data from .env
     model_config = SettingsConfigDict(
-        env_file=".env",
+        env_file="./.env",
         env_file_encoding='utf-8',
         case_sensitive=True
     )
@@ -72,6 +72,7 @@ class Settings(BaseSettings):
     POSTGRES_USER: str
     POSTGRES_PASSWORD: str
     POSTGRES_DB: str
+    POSTGRES_PORT: int
     SQLALCHEMY_DATABASE_URI: Optional[PostgresDsn] = None
 
     @validator("SQLALCHEMY_DATABASE_URI", pre=True)
@@ -83,6 +84,7 @@ class Settings(BaseSettings):
             username=values.get("POSTGRES_USER"),
             password=values.get("POSTGRES_PASSWORD"),
             host=values.get("POSTGRES_SERVER"),
+            port=values.get("POSTGRES_PORT"),
             path=f"{values.get('POSTGRES_DB') or ''}",
         )
 
